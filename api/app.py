@@ -161,7 +161,7 @@ def evaluatewater(answers):
         score += 1
     if answers[8] < 0.5:
         score += 1
-
+#12
 def evaluateenergy(answers):
     score = 0
 
@@ -185,7 +185,7 @@ def evaluateenergy(answers):
         score += 1
     if answers[7] > 20: #how much consumed
         score += 1
-
+#10
 def evaluatematerials(answers):
     score = 0
 
@@ -203,7 +203,7 @@ def evaluatematerials(answers):
         score += 1
     if answers[6] > 90: 
         score += 1
-
+#7
 def evaluateindoor(answers):
     score = 0
 
@@ -215,6 +215,42 @@ def evaluateindoor(answers):
         score += 1
     if answers[2] != "Never":
         score += 1
+#4
+@app.route('/submit')
+def quiz():
+    answers = request.json 
+    finalscore = 0
+    waterscore, energyscore,matscore,indoorscore = 0
+    errors = []
+    print("Evaluating Quiz")
+    for category, questions in questions.items():
+        userAnswers = answers[category]
+        for index in enumerate(questions):
+            if category == "Water Efficiency":
+                score = evaluatewater(answers[category])
+                finalscore +=  score
+                waterscore += score
+            if category == "Energy and Atmosphere":
+                score = evaluatewater(answers[category])
+                finalscore +=  score
+                energyscore += score
+            if category == "Materials and Resources":
+                score = evaluatewater(answers[category])
+                finalscore +=  score
+                matscore += score
+            if category == "Indoor Environmental Quality":
+                score = evaluatewater(answers[category])
+                finalscore +=  score
+                indoorscore += score
+    finalscore = (finalscore*100)/33
+    
+    return jsonify({
+        "score": finalscore,
+        "waterscore": waterscore,
+        "energyscore": energyscore,
+        "matscore": matscore,
+        "indoorscore": indoorscore
+    })
 
 @app.route('/')
 def hello_world():
