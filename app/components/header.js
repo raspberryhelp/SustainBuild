@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useAuth0 } from '@auth0/auth0-react';
-// import Hamburger from 'hamburger-react';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
     const links = [
@@ -11,7 +10,7 @@ const Navbar = () => {
         { to: '/#page3', label: 'Learn More' },
     ];
 
-    const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+    const router = useRouter();
 
     const [isToggled, setIsToggled] = useState(false);
 
@@ -54,31 +53,11 @@ const Navbar = () => {
                     <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
                         <div className="relative z-20 flex w-full justify-between md:px-0 lg:w-max">
                             <div >
-                                {/*
-                                isAuthenticated && (
-                                <Hamburger  toggled={isToggled}  toggle = {setIsToggled}    direction="right"   />
-                                )
-                                    {isToggled && isAuthenticated &&(
-                                        <div className="absolute left-0 top-full mt-2 w-61 bg-gray-100 dark:bg-gray-800 p-4 shadow-lg rounded-lg">
-                                            <ul className="flex flex-col space-y-2">
-                                                {hamburgerLinks.map((link) => (
-                                                    <li key={link.label}>
-                                                        <Link to={link.to}>
-                                                            <span className="block text-gray-900 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 transition">
-                                                                {link.label}
-                                                            </span>
-                                                        </Link>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )}
-                                */}
                             </div>
                             <a href="/splash" aria-label="logo" className="flex items-center space-x-2 text-2xl">
                                 <div aria-hidden="true" className="flex space-x-1">
                                     {<div className="h-[1.5em] w-[1.5em] flex justify-center items-center overflow-hidden rounded-full">
-                                        <img src="/assets/logo.png" alt="Logo" className="object-cover h-full w-full" />
+                                        <img src="/_-removebg-preview.png" alt="Logo" className="object-cover h-full w-full" />
                                     </div>}
                                 </div>
                                 <span className="text-2xl font-medium text-electricblue dark:text-white">Sustainacity</span>
@@ -106,25 +85,12 @@ const Navbar = () => {
                             </div>
 
                             <div className="mt-12 lg:mt-0">
-                            {!isAuthenticated ? (
-                                <button
-                                onClick={() => loginWithRedirect()}
+                            <button
+                                onClick={() => router.push('/quiz')}
                                 className="relative flex h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-green-200 dark:before:bg-green-200 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                                 >
                                 <span className="relative text-sm font-semibold text-background">Get Started</span>
-                                </button>
-                            ) : (
-                                <button
-                                onClick={() =>
-                                    logout({
-                                    logoutParams: { returnTo: window.location.origin },
-                                    })
-                                }
-                                className="relative flex h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-electricblue dark:before:bg-blue-950 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
-                                >
-                                <span className="relative text-sm font-semibold text-background">Logout</span>
-                                </button>
-                            )}
+                            </button>
                             </div>
                         </div>
                     </div>

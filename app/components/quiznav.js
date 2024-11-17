@@ -8,6 +8,8 @@ const flattenQuestions = (questionsDict) => {
 };
 
 const QuizNavigation = ({ questions }) => {
+  const router = useRouter();
+
   const flattenedQuestions = flattenQuestions(questions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -26,7 +28,7 @@ const QuizNavigation = ({ questions }) => {
   const handleSubmit = () => {
     // Handle submission logic here
     alert("Quiz submitted!");
-
+    router.push('/results');
   };
 
   return (
