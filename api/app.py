@@ -134,6 +134,87 @@ questions ={
   ]
 }
 
+def evaluatewater(answers):
+    score = 0
+
+    if answers[0] < 10: #gallon
+        score += 1
+    if answers[1]: #toilet
+        score += 1
+    if answers[2]: #harvesting rain water
+        score += 1
+    if answers[3] > 400: #amount of harvesting
+        score += 1
+    if answers[4]: #is water recycled
+        score += 1
+    if answers[5] >= 15: #how much
+        score += 1
+    if answers[6]: #irrigation
+        score += 1
+    if answers[7] == "Weekly": ## how often
+        score += 1
+    if answers[7] == "Bi-weekly": ## how often
+        score += 1
+    if answers[7] == "Monthly": ## how often
+        score += 1
+    if answers[7] == "As needed": ## how often
+        score += 1
+    if answers[8] < 0.5:
+        score += 1
+
+def evaluateenergy(answers):
+    score = 0
+
+    if answers[0] < 30: # current energy
+        score += 1
+    if answers[1]: #automated  lighting
+        score += 1
+    if answers[2] < 14:  #how long it stays on
+        score += 1
+    if answers[3]: #remote sensor activation
+        score += 1
+    if answers[4]: #is water recycled
+        score += 1
+    if answers[5] == "Wind": #if they choose any
+        score += 1
+    if answers[5] == "Solar": #if they choose any
+        score += 1
+    if answers[5] == "Geothermal": #if they choose any
+        score += 1
+    if answers[6] > 40: #how much renewable
+        score += 1
+    if answers[7] > 20: #how much consumed
+        score += 1
+
+def evaluatematerials(answers):
+    score = 0
+
+    if answers[0]:
+        score += 1
+    if answers[1] == "Never":
+        score += 1
+    if answers[2] == "": ##side note this was supposed to have ai in mind but we didnt have time
+        score += 1
+    if answers[3]: 
+        score += 1
+    if answers[4]: 
+        score += 1
+    if answers[5] > 25: 
+        score += 1
+    if answers[6] > 90: 
+        score += 1
+
+def evaluateindoor(answers):
+    score = 0
+
+    if answers[0] == "1":
+        score += 1
+    if answers[0] == "2":
+        score += 1
+    if answers[1] :
+        score += 1
+    if answers[2] != "Never":
+        score += 1
 
 @app.route('/')
 def hello_world():
