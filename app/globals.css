@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    background-image: url('../public/Background\ abstrak\ en\ 2022\ |\ Plantillas\ para\ diapositivas\,\ Plantillas\ de\ fondo\ de\ powerpoint\,\ Plantillas\ power\ point\ gratis.jpg');
+    background-image: url('/background.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
