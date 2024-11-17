@@ -22,9 +22,9 @@ const page = () => {
           <div className="mt-8 flex justify-center gap-y-4 gap-x-6">
             <button
               onClick={() => router.push('/quiz')}
-              className="relative flex h-11 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-green-400 dark:before:bg-vibrant-green before:transition before:duration-300 hover:before:scale-105 active:before:scale-95"
+              className="relative flex h-11 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-lightgreen dark:before:bg-vibrant-green before:transition before:duration-300 hover:before:scale-105 active:before:scale-95"
             >
-              <span className="relative text-base font-semibold text-background">
+              <span className="relative text-base font-semibold text-white">
                 Get Started
               </span>
             </button>
