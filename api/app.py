@@ -216,7 +216,7 @@ def evaluateindoor(answers):
     if answers[2] != "Never":
         score += 1
 #4
-@app.route('/submit')
+@app.route('/submit', methods="POST")
 def quiz():
     answers = request.json 
     finalscore = 0
@@ -254,5 +254,5 @@ def quiz():
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return 'Hello, World! I am here :)'
 
