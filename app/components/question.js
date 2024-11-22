@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import axios from "axios";
 
 const Question = ({ question }) => {
   // Initialize answer based on question type
@@ -18,11 +19,13 @@ const Question = ({ question }) => {
 
   const handleInputChange = (value) => {
     if (question.type === 'multiselect') {
-      setAnswer((prev) => 
-        prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]
+      const updatedAnswer = answer.includes(value)
+      setAnswer(updatedAnswer
       );
+      updateAnswer(question.id, updatedAnswer);
     } else {
       setAnswer(value);
+      updateAnswer(question.id, value);
     }
   };
 

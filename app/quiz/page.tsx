@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "../components/header";
 import QuizNavigation from "../components/quiznav"
+
 
 const questions = {
   "Water Efficiency": [

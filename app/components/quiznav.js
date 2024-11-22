@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import Question from './Question'; // Assuming you have a Question component
 import { useRouter } from 'next/navigation';
+import axios from "axios";
+
+
 
 const flattenQuestions = (questionsDict) => {
   return Object.values(questionsDict).flat();
@@ -9,9 +12,12 @@ const flattenQuestions = (questionsDict) => {
 
 const QuizNavigation = ({ questions }) => {
   const router = useRouter();
+  const [answers, setAnswers] = useState({});
+
 
   const flattenedQuestions = flattenQuestions(questions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  
 
   const goToPreviousQuestion = () => {
     setCurrentQuestionIndex((prevIndex) => 
@@ -25,15 +31,39 @@ const QuizNavigation = ({ questions }) => {
     );
   };
 
-  const handleSubmit = () => {
-    // Handle submission logic here
-    alert("Quiz submitted!");
-    router.push('/results');
+  const handleSubmit = async () => {
+    // Log the answers to verify data before submission
+    console.log("Submitting answers:", answers);
+    try {
+      const response = await axios.post("http://localhost:3000/submit", { answers });
+      console.log("Quiz submitted successfully:", response.data);
+      console.log("Submitting these answers:", answers);
+
+    } catch (error) {
+      if (error.response) {
+        // Server responded with a status other than 200 range
+        console.error("Response error:", error.response.data);
+        alert(`Server Error: ${error.response.data.message || "Unknown error occurred."}`);
+      } else if (error.request) {
+        // Request was made but no response received
+        console.error("Request error:", error.request);
+        alert("No response from the server. Please check the server is running.");
+      } else {
+        // Something else caused the error
+        console.error("Error in submission:", error.message);
+        alert(`Unexpected Error: ${error.message}`);
+        console.log("Submitting these answers:", answers);
+
+      }
+    }
+    
   };
+  
 
   return (
     <div className="flex flex-col items-center">
-      <Question question={flattenedQuestions[currentQuestionIndex]} />
+      <Question question={flattenedQuestions[currentQuestionIndex]}
+      updateAnswer={(id, value) => setAnswers((prev) => ({ ...prev, [id]: value }))} />
       
       {/* Progress Bar */}
       <div className="w-[30%] bg-gray-200 rounded-full h-2 mt-4">
